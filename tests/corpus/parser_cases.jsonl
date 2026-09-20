@@ -1,0 +1,95 @@
+{"id": "spanset_empty", "query": "{}", "expect": "accept", "source": "tempo_docs", "tags": ["spanset"]}
+{"id": "spanset_empty_spaces", "query": "{   }", "expect": "accept", "source": "tempo_docs", "tags": ["spanset"]}
+{"id": "resource_service_name_eq", "query": "{ resource.service.name = \"frontend\" }", "expect": "accept", "source": "tempo_docs", "tags": ["resource", "attribute"]}
+{"id": "resource_service_name_neq", "query": "{ resource.service.name != \"legacy\" }", "expect": "accept", "source": "tempo_docs", "tags": ["resource", "attribute", "neq"]}
+{"id": "resource_service_name_regex", "query": "{ resource.service.name =~ \"front.*\" }", "expect": "accept", "source": "tempo_docs", "tags": ["resource", "regex"]}
+{"id": "resource_service_name_nregex", "query": "{ resource.service.name !~ \"test-.*\" }", "expect": "accept", "source": "tempo_docs", "tags": ["resource", "regex"]}
+{"id": "resource_cluster_eq", "query": "{ resource.cluster = \"prod-us\" }", "expect": "accept", "source": "tempo_docs", "tags": ["resource", "attribute"]}
+{"id": "resource_region_eq", "query": "{ resource.region = \"us-east-1\" }", "expect": "accept", "source": "tempo_docs", "tags": ["resource", "attribute"]}
+{"id": "resource_k8s_namespace_eq", "query": "{ resource.k8s.namespace.name = \"checkout\" }", "expect": "accept", "source": "tempo_docs", "tags": ["resource", "attribute", "dotted"]}
+{"id": "span_attr_string_eq", "query": "{ span.http.method = \"GET\" }", "expect": "accept", "source": "tempo_docs", "tags": ["span", "attribute"]}
+{"id": "span_attr_string_neq", "query": "{ span.http.route != \"/metrics\" }", "expect": "accept", "source": "tempo_docs", "tags": ["span", "attribute", "neq"]}
+{"id": "span_attr_int_eq", "query": "{ span.http.status_code = 500 }", "expect": "accept", "source": "tempo_docs", "tags": ["span", "attribute", "int"]}
+{"id": "span_attr_int_gte", "query": "{ span.http.status_code >= 400 }", "expect": "accept", "source": "tempo_docs", "tags": ["span", "attribute", "int", "ordering"]}
+{"id": "span_attr_int_lt", "query": "{ span.http.status_code < 600 }", "expect": "accept", "source": "tempo_docs", "tags": ["span", "attribute", "int", "ordering"]}
+{"id": "span_attr_int_gt", "query": "{ span.retries > 2 }", "expect": "accept", "source": "tempo_docs", "tags": ["span", "attribute", "int", "ordering"]}
+{"id": "span_attr_int_lte", "query": "{ span.retries <= 5 }", "expect": "accept", "source": "tempo_docs", "tags": ["span", "attribute", "int", "ordering"]}
+{"id": "span_attr_bool_true", "query": "{ span.ok = true }", "expect": "accept", "source": "tempo_docs", "tags": ["span", "attribute", "bool"]}
+{"id": "span_attr_bool_false", "query": "{ span.cache.hit = false }", "expect": "accept", "source": "tempo_docs", "tags": ["span", "attribute", "bool"]}
+{"id": "span_attr_float_eq", "query": "{ span.ratio = 0.5 }", "expect": "accept", "source": "tempo_docs", "tags": ["span", "attribute", "float"]}
+{"id": "span_attr_regex", "query": "{ span.http.method =~ \"GET|POST\" }", "expect": "accept", "source": "tempo_docs", "tags": ["span", "regex"]}
+{"id": "span_attr_nregex", "query": "{ span.http.target !~ \"/health.*\" }", "expect": "accept", "source": "tempo_docs", "tags": ["span", "regex"]}
+{"id": "span_attr_db_system", "query": "{ span.db.system = \"postgresql\" }", "expect": "accept", "source": "tempo_docs", "tags": ["span", "attribute", "dotted"]}
+{"id": "intrinsic_name_eq", "query": "{ span:name = \"HTTP GET\" }", "expect": "accept", "source": "tempo_docs", "tags": ["intrinsic", "name"]}
+{"id": "intrinsic_name_neq", "query": "{ span:name != \"healthcheck\" }", "expect": "accept", "source": "tempo_docs", "tags": ["intrinsic", "name", "neq"]}
+{"id": "intrinsic_name_regex", "query": "{ span:name =~ \"GET /.*\" }", "expect": "accept", "source": "tempo_docs", "tags": ["intrinsic", "name", "regex"]}
+{"id": "alias_name_eq", "query": "{ name = \"POST /api/orders\" }", "expect": "accept", "source": "grafana_search", "tags": ["alias", "name"]}
+{"id": "alias_name_regex", "query": "{ name =~ \"POST /.*\" }", "expect": "accept", "source": "grafana_search", "tags": ["alias", "name", "regex"]}
+{"id": "trace_id_eq", "query": "{ trace:id = \"0af7651916cd43dd8448eb211c80319c\" }", "expect": "accept", "source": "tempo_docs", "tags": ["intrinsic", "trace_id"]}
+{"id": "trace_id_invalid_hex", "query": "{ trace:id = \"deadbeef\" }", "expect": "accept", "source": "packdb_regression", "tags": ["intrinsic", "trace_id", "lowering_validation"]}
+{"id": "duration_span_gt_ms", "query": "{ span:duration > 100ms }", "expect": "accept", "source": "tempo_docs", "tags": ["intrinsic", "duration"]}
+{"id": "duration_span_gte_ms", "query": "{ span:duration >= 10ms }", "expect": "accept", "source": "tempo_docs", "tags": ["intrinsic", "duration"]}
+{"id": "duration_span_lt_s", "query": "{ span:duration < 1s }", "expect": "accept", "source": "tempo_docs", "tags": ["intrinsic", "duration"]}
+{"id": "duration_span_lte_fractional_s", "query": "{ span:duration <= 2.5s }", "expect": "accept", "source": "tempo_docs", "tags": ["intrinsic", "duration", "float"]}
+{"id": "duration_trace_gte_s", "query": "{ trace:duration >= 1s }", "expect": "accept", "source": "tempo_docs", "tags": ["intrinsic", "duration", "trace"]}
+{"id": "duration_trace_gt_s", "query": "{ trace:duration > 2s }", "expect": "accept", "source": "tempo_docs", "tags": ["intrinsic", "duration", "trace"]}
+{"id": "alias_duration_gt_ms", "query": "{ duration > 500ms }", "expect": "accept", "source": "grafana_search", "tags": ["alias", "duration"]}
+{"id": "duration_unit_ns", "query": "{ span:duration > 100ns }", "expect": "accept", "source": "tempo_docs", "tags": ["intrinsic", "duration", "unit"]}
+{"id": "duration_unit_us", "query": "{ span:duration > 250us }", "expect": "accept", "source": "tempo_docs", "tags": ["intrinsic", "duration", "unit"]}
+{"id": "duration_unit_minutes", "query": "{ trace:duration > 5m }", "expect": "accept", "source": "tempo_docs", "tags": ["intrinsic", "duration", "unit"]}
+{"id": "duration_unit_hours", "query": "{ trace:duration > 1h }", "expect": "accept", "source": "tempo_docs", "tags": ["intrinsic", "duration", "unit"]}
+{"id": "status_intrinsic_error", "query": "{ span:status = error }", "expect": "accept", "source": "tempo_docs", "tags": ["intrinsic", "status", "enum"]}
+{"id": "status_intrinsic_ok", "query": "{ span:status = ok }", "expect": "accept", "source": "tempo_docs", "tags": ["intrinsic", "status", "enum"]}
+{"id": "status_alias_error", "query": "{ status = error }", "expect": "accept", "source": "grafana_search", "tags": ["alias", "status", "enum"]}
+{"id": "status_quoted_ok", "query": "{ status = \"ok\" }", "expect": "accept", "source": "tempo_docs", "tags": ["alias", "status", "enum", "quoted"]}
+{"id": "status_unset", "query": "{ status = unset }", "expect": "accept", "source": "tempo_docs", "tags": ["alias", "status", "enum"]}
+{"id": "status_neq_unset", "query": "{ status != unset }", "expect": "accept", "source": "tempo_docs", "tags": ["alias", "status", "enum", "neq"]}
+{"id": "kind_intrinsic_server", "query": "{ span:kind = server }", "expect": "accept", "source": "tempo_docs", "tags": ["intrinsic", "kind", "enum"]}
+{"id": "kind_alias_client", "query": "{ kind = client }", "expect": "accept", "source": "grafana_search", "tags": ["alias", "kind", "enum"]}
+{"id": "kind_neq_internal", "query": "{ kind != internal }", "expect": "accept", "source": "tempo_docs", "tags": ["alias", "kind", "enum", "neq"]}
+{"id": "kind_producer", "query": "{ kind = producer }", "expect": "accept", "source": "tempo_docs", "tags": ["alias", "kind", "enum"]}
+{"id": "kind_consumer", "query": "{ kind = consumer }", "expect": "accept", "source": "tempo_docs", "tags": ["alias", "kind", "enum"]}
+{"id": "bool_and_range", "query": "{ span.http.status_code >= 400 && span.http.status_code < 600 }", "expect": "accept", "source": "tempo_docs", "tags": ["boolean", "and"]}
+{"id": "bool_or_service", "query": "{ resource.service.name = \"api\" || resource.service.name = \"web\" }", "expect": "accept", "source": "tempo_docs", "tags": ["boolean", "or"]}
+{"id": "bool_parens_group", "query": "{ (span.a = \"1\" || span.b = \"2\") && span.c = \"3\" }", "expect": "accept", "source": "tempo_docs", "tags": ["boolean", "parens"]}
+{"id": "bool_and_three", "query": "{ resource.service.name = \"api\" && status = error && duration > 100ms }", "expect": "accept", "source": "grafana_search", "tags": ["boolean", "and"]}
+{"id": "bool_mixed_precedence", "query": "{ span.a = \"1\" && span.b = \"2\" || span.c = \"3\" }", "expect": "accept", "source": "tempo_docs", "tags": ["boolean", "precedence"]}
+{"id": "grafana_compact_multi", "query": "{ resource.service.name=\"frontend\" && name=\"GET /api\" && status=error }", "expect": "accept", "source": "grafana_search", "tags": ["grafana", "compact"]}
+{"id": "grafana_service_and_duration", "query": "{ resource.service.name = \"checkout\" && duration > 250ms }", "expect": "accept", "source": "grafana_search", "tags": ["grafana"]}
+{"id": "grafana_compact_no_spaces", "query": "{resource.service.name=\"api\"}", "expect": "accept", "source": "grafana_search", "tags": ["grafana", "compact"]}
+{"id": "grafana_name_and_kind", "query": "{ name = \"GET /cart\" && kind = server }", "expect": "accept", "source": "grafana_search", "tags": ["grafana"]}
+{"id": "regex_non_capturing_group", "query": "{ span.name =~ \"(?:GET|POST) /.*\" }", "expect": "accept", "source": "tempo_docs", "tags": ["regex", "re2"]}
+{"id": "regex_case_insensitive_flag", "query": "{ span.name =~ \"(?i)get\" }", "expect": "accept", "source": "tempo_docs", "tags": ["regex", "re2"]}
+{"id": "regex_named_group", "query": "{ span.name =~ \"(?P<verb>GET|POST)\" }", "expect": "accept", "source": "tempo_docs", "tags": ["regex", "re2"]}
+{"id": "regex_charclass_lookalike", "query": "{ span.name =~ \"[(?=]\" }", "expect": "accept", "source": "packdb_regression", "tags": ["regex", "re2"]}
+{"id": "regex_lookahead_deferred", "query": "{ span.name =~ \"foo(?=bar)\" }", "expect": "accept", "source": "packdb_regression", "tags": ["regex", "non_re2", "lowering_deferred"]}
+{"id": "regex_lookbehind_deferred", "query": "{ span.name !~ \"(?<=foo)bar\" }", "expect": "accept", "source": "packdb_regression", "tags": ["regex", "non_re2", "lowering_deferred"]}
+{"id": "regex_backreference_deferred", "query": "{ span.name =~ `(foo)\\1` }", "expect": "accept", "source": "packdb_regression", "tags": ["regex", "non_re2", "lowering_deferred"]}
+{"id": "regex_anchored", "query": "{ span.name =~ \"^GET\" }", "expect": "accept", "source": "tempo_docs", "tags": ["regex", "re2"]}
+{"id": "regex_alternation_service", "query": "{ resource.service.name =~ \"web|api\" }", "expect": "accept", "source": "tempo_docs", "tags": ["regex", "re2"]}
+{"id": "unsupported_structural_descendant", "query": "{ span.a = \"1\" } >> { span.b = \"2\" }", "expect": "unsupported", "source": "tempo_docs", "tags": ["structural"]}
+{"id": "unsupported_structural_child", "query": "{ span.a = \"1\" } > { span.b = \"2\" }", "expect": "unsupported", "source": "tempo_docs", "tags": ["structural"]}
+{"id": "unsupported_metrics_pipe_rate", "query": "{ span.a = \"1\" } | rate()", "expect": "unsupported", "source": "tempo_docs", "tags": ["metrics", "pipe"]}
+{"id": "unsupported_metrics_pipe_count_over_time", "query": "{ span.a = \"1\" } | count_over_time()", "expect": "unsupported", "source": "tempo_docs", "tags": ["metrics", "pipe"]}
+{"id": "unsupported_hint_most_recent", "query": "{ span.a = \"1\" } with (most_recent=true)", "expect": "unsupported", "source": "tempo_docs", "tags": ["hint"]}
+{"id": "unsupported_event_scope", "query": "{ event.name = \"exception\" }", "expect": "unsupported", "source": "tempo_docs", "tags": ["scope", "event"]}
+{"id": "unsupported_link_scope", "query": "{ link.trace_id = \"abc\" }", "expect": "unsupported", "source": "tempo_docs", "tags": ["scope", "link"]}
+{"id": "unsupported_spanset_combine_and", "query": "{ span.a = \"1\" } && { span.b = \"2\" }", "expect": "unsupported", "source": "tempo_docs", "tags": ["spanset_combine"]}
+{"id": "unsupported_nested_spanset", "query": "{ { span.a = 1 } }", "expect": "unsupported", "source": "tempo_docs", "tags": ["spanset_nested"]}
+{"id": "unsupported_unknown_intrinsic", "query": "{ span:foo = \"x\" }", "expect": "unsupported", "source": "packdb_regression", "tags": ["intrinsic", "unknown"]}
+{"id": "unsupported_unscoped_service", "query": "{ service = \"frontend\" }", "expect": "unsupported", "source": "packdb_regression", "tags": ["unscoped"]}
+{"id": "unsupported_unscoped_dotted_attr", "query": "{ http.status_code = 500 }", "expect": "unsupported", "source": "packdb_regression", "tags": ["unscoped"]}
+{"id": "syntax_empty_input", "query": "", "expect": "syntax", "source": "packdb_regression", "tags": ["syntax"]}
+{"id": "syntax_unclosed_brace", "query": "{", "expect": "syntax", "source": "packdb_regression", "tags": ["syntax"]}
+{"id": "syntax_missing_braces", "query": "resource.service.name = \"api\"", "expect": "syntax", "source": "packdb_regression", "tags": ["syntax"]}
+{"id": "syntax_double_equals", "query": "{ span.name == \"x\" }", "expect": "syntax", "source": "packdb_regression", "tags": ["syntax", "operator"]}
+{"id": "syntax_missing_rhs_duration", "query": "{ span:duration > }", "expect": "syntax", "source": "packdb_regression", "tags": ["syntax", "missing_rhs"]}
+{"id": "syntax_missing_field", "query": "{ = \"x\" }", "expect": "syntax", "source": "packdb_regression", "tags": ["syntax", "missing_field"]}
+{"id": "syntax_empty_scoped_attr", "query": "{ span. = \"x\" }", "expect": "syntax", "source": "packdb_regression", "tags": ["syntax", "missing_field"]}
+{"id": "syntax_status_missing_rhs", "query": "{ status = }", "expect": "syntax", "source": "packdb_regression", "tags": ["syntax", "missing_rhs", "enum"]}
+{"id": "syntax_kind_missing_rhs", "query": "{ kind = }", "expect": "syntax", "source": "packdb_regression", "tags": ["syntax", "missing_rhs", "enum"]}
+{"id": "validation_regex_on_number", "query": "{ span.code =~ 500 }", "expect": "validation", "source": "packdb_regression", "tags": ["validation", "regex"]}
+{"id": "validation_ordering_on_string", "query": "{ span.name > \"x\" }", "expect": "validation", "source": "packdb_regression", "tags": ["validation", "ordering"]}
+{"id": "validation_unknown_status_keyword", "query": "{ status = bogus }", "expect": "validation", "source": "packdb_regression", "tags": ["validation", "enum", "status"]}
+{"id": "validation_unknown_kind_keyword", "query": "{ kind = wormhole }", "expect": "validation", "source": "packdb_regression", "tags": ["validation", "enum", "kind"]}
+{"id": "validation_ordering_on_status_enum", "query": "{ status > error }", "expect": "validation", "source": "packdb_regression", "tags": ["validation", "ordering", "enum"]}
