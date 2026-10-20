@@ -1,4 +1,4 @@
-// Copyright 2026 PackDb Contributors
+// Copyright 2026 PackDB Contributors
 //
 // Licensed under the Apache License, Version 2.0
 
