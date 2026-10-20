@@ -15,7 +15,7 @@ crates.io:
 
 ```toml
 [dependencies]
-packdb-traceql-parser = { git = "https://github.com/packdb-oss/traceql-parser", tag = "v0.1.1" }
+packdb-traceql-parser = { git = "https://github.com/packdb-oss/traceql-parser", tag = "v0.1.2" }
 ```
 
 ```rust
